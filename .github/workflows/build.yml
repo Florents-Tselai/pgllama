@@ -50,7 +50,7 @@ jobs:
           postgres-version: ${{ matrix.postgres }}
           dev-files: true
 
-      - run: make
+      - run: make all
 
       - run: sudo make install
 

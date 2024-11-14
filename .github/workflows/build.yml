@@ -6,6 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        llamacpp-version: ["b4079"]
         include:
           - postgres: 18
             os: ubuntu-24.04
@@ -28,9 +29,9 @@ jobs:
       - name: Install llama.cpp from source
         run: |
           cd /tmp
-          wget "https://github.com/ggerganov/llama.cpp/archive/refs/tags/b4079.tar.gz"
-          tar xzf b4079.tar.gz
-          cd llama.cpp-b4079
+          wget "https://github.com/ggerganov/llama.cpp/archive/refs/tags/${{ matrix.llamacpp-version }}.tar.gz"
+          tar xzf ${{ matrix.llamacpp-version }}.tar.gz
+          cd llama.cpp-${{ matrix.llamacpp-version }}
           mkdir build
           cd build
           cmake .. \

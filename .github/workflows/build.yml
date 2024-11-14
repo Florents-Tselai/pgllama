@@ -25,13 +25,25 @@ jobs:
           sudo apt update
           sudo apt install -y pkg-config wget cmake build-essential curl git
 
-      - name: Install Homebrew
+      - name: Install llama.cpp
         run: |
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          echo 'eval "$($(brew --prefix)/bin/brew shellenv)"' >> $GITHUB_ENV
-          eval "$($(brew --prefix)/bin/brew shellenv)"
-
-      - run: brew install llama.cpp
+          cd /tmp
+          wget "https://github.com/ggerganov/llama.cpp/archive/refs/tags/b4079.tar.gz"
+          tar xzf b4079.tar.gz
+          cd llama.cpp-b4079
+          mkdir build
+          cd build
+          cmake .. \
+            -DLLAMA_FATAL_WARNINGS=ON \
+            -DLLAMA_CURL=ON \
+            -DGGML_METAL_USE_BF16=ON \
+            -DGGML_METAL_EMBED_LIBRARY=ON \
+            -DGGML_RPC=ON \
+            -DBUILD_SHARED_LIBS=OFF \
+            --install-prefix=/usr/local
+            
+          cmake --build . --config Release -j $(sysctl -n hw.logicalcpu)
+          
 
       - uses: ankane/setup-postgres@v1
         with:

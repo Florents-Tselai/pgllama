@@ -23,7 +23,7 @@ jobs:
 
       - run: |
           sudo apt update
-          sudo apt install -y pkg-config wget cmake build-essential curl git
+          sudo apt install -y pkg-config wget cmake build-essential curl git libcurl4-openssl-dev
 
       - name: Install llama.cpp
         run: |
@@ -43,7 +43,6 @@ jobs:
             --install-prefix=/usr/local
             
           cmake --build . --config Release -j $(sysctl -n hw.logicalcpu)
-          
 
       - uses: ankane/setup-postgres@v1
         with:

@@ -43,7 +43,7 @@ jobs:
             -DCMAKE_INSTALL_PREFIX=/usr/local
             
           cmake --build . --config Release -j $(sysctl -n hw.logicalcpu)
-          make install
+          sudo make install
 
       - uses: ankane/setup-postgres@v1
         with:

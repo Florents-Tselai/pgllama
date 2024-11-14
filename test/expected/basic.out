@@ -1,0 +1,27 @@
+/* Create model from file; No errors*/
+SELECT '/tmp/phi-2.Q2_K.gguf'::llama_model;
+      llama_model      
+-----------------------
+ phi2 3B Q2_K - Medium
+(1 row)
+
+-- ## Model Metadata
+SELECT llama_model_desc('/tmp/phi-2.Q2_K.gguf'::llama_model);
+   llama_model_desc    
+-----------------------
+ phi2 3B Q2_K - Medium
+(1 row)
+
+SELECT pg_size_pretty(llama_model_size('/tmp/phi-2.Q2_K.gguf'::llama_model));
+ pg_size_pretty 
+----------------
+ 1118 MB
+(1 row)
+
+SELECT llama_model_n_params('/tmp/phi-2.Q2_K.gguf'::llama_model);
+ llama_model_n_params 
+----------------------
+           2779683840
+(1 row)
+
+-- ## Tokenizing

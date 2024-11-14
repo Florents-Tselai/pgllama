@@ -43,6 +43,7 @@ jobs:
             --install-prefix=/usr/local
             
           cmake --build . --config Release -j $(sysctl -n hw.logicalcpu)
+          make install
 
       - uses: ankane/setup-postgres@v1
         with:

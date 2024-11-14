@@ -23,15 +23,13 @@ jobs:
 
       - run: |
           sudo apt update
-          sudo apt install -y pkg-config wget cmake build-essential curl
+          sudo apt install -y pkg-config wget cmake build-essential curl git
 
       - name: Install Homebrew
         run: |
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          
-          # Add Homebrew to the PATH
-          echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $GITHUB_ENV
-          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          echo 'eval "$($(brew --prefix)/bin/brew shellenv)"' >> $GITHUB_ENV
+          eval "$($(brew --prefix)/bin/brew shellenv)"
 
       - run: brew install llama.cpp
 

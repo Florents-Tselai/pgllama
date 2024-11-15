@@ -17,6 +17,21 @@ SELECT '/tmp/tinyllama-1.1b-1t-openorca.Q2_K.gguf'::llama_model;
  llama 1B Q2_K - Medium
 (1 row)
 ```
+## Limitation
+
+<details>
+<summary>Typical run using LLaMA v2 13B on M2 Ultra</summary>
+Bla bla bla
+</details>
+
+> [!NOTE]
+> If you prefer basic usage, please consider using conversation mode instead of interactive mode
+
+> [!TIP]
+> If you prefer basic usage, please consider using conversation mode instead of interactive mode
+
+> [!WARNING]
+> If you prefer basic usage, please consider using conversation mode instead of interactive mode
 
 ## API
 

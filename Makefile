@@ -20,7 +20,7 @@ TESTS = $(wildcard test/sql/*.sql)
 REGRESS = $(patsubst test/sql/%.sql,%,$(TESTS))
 REGRESS_OPTS = --inputdir=test --load-extension=$(EXTENSION)
 
-TEST_MODELS := phi-2.Q2_K #qwen2-0_5b-instruct-q8_0 tinyllama-1.1b-1t-openorca.Q2_K
+TEST_MODELS := phi-2.Q2_K qwen2-0_5b-instruct-q8_0 tinyllama-1.1b-1t-openorca.Q2_K
 MODELS_PATHS := $(patsubst %,models/%.gguf,$(TEST_MODELS))
 MODELS_TMP_PATHS := $(patsubst %,/tmp/%.gguf,$(TEST_MODELS))
 

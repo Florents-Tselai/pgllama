@@ -1,5 +1,7 @@
 #include "pgllama.h"
+#ifdef PG_MODULE_MAGIC
 PG_MODULE_MAGIC;
+#endif
 
 typedef struct varlena llama_model_type;
 #define DatumGetLlamaModelP(X)		((llama_model_type *) PG_DETOAST_DATUM(X))
@@ -121,3 +123,45 @@ pg_llama_model_n_params(PG_FUNCTION_ARGS)
     PG_RETURN_INT64(result);
 }
 
+PG_FUNCTION_INFO_V1(pg_llama_tokenize);
+Datum
+pg_llama_tokenize(PG_FUNCTION_ARGS)
+{
+    llama_model_type* model_data = (llama_model_type*) PG_GETARG_POINTER(0);
+    const char* model_path = VARDATA(model_data);
+    struct llama_model_params model_params = llama_model_default_params();
+    struct llama_model* model;
+    model = llama_load_model_from_file(model_path, model_params);
+    if (model == NULL)
+        elog(ERROR, "llama_load_model_from_file failed");
+
+    text *prompt = PG_GETARG_TEXT_PP(1);
+    bool add_special = PG_GETARG_BOOL(2);
+    bool parse_special = PG_GETARG_BOOL(3);
+
+    int n_tokens = VARSIZE_ANY_EXHDR(prompt) + 2 * add_special; // upper limit for the number of tokens
+    llama_token * tokens = palloc(n_tokens * sizeof(llama_token));
+
+    n_tokens = llama_tokenize(model, VARDATA(prompt), VARSIZE_ANY_EXHDR(prompt),
+        tokens, n_tokens, add_special, parse_special);
+
+    Datum *datums = palloc(n_tokens * sizeof(Datum));
+    for (int i = 0; i < n_tokens; i++) {
+        datums[i] = Int32GetDatum(tokens[i]);
+    }
+
+    ArrayType *array = construct_array(
+        datums,
+        n_tokens,
+        INT4OID,
+        sizeof(int32),
+        true,       // int32 is pass-by-value in PostgreSQL
+        'i'         // int32 is 4-byte aligned
+    );
+
+    pfree(tokens);
+    pfree(datums);
+    llama_free_model(model);
+
+    PG_RETURN_ARRAYTYPE_P(array);
+}

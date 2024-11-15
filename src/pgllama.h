@@ -12,7 +12,9 @@
 #include "utils/jsonb.h"
 #include "utils/datetime.h"
 #include "utils/date.h"
-
+#include "utils/array.h"
+#include "utils/fmgroids.h"
+#include "catalog/pg_type.h"
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>

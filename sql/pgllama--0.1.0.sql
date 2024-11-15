@@ -28,3 +28,7 @@ CREATE CAST (text AS llama_model) WITH INOUT AS ASSIGNMENT;
 CREATE FUNCTION llama_model_desc(llama_model) RETURNS text IMMUTABLE STRICT LANGUAGE C AS 'MODULE_PATHNAME', 'pg_llama_model_desc';
 CREATE FUNCTION llama_model_size(llama_model) RETURNS bigint IMMUTABLE STRICT LANGUAGE C AS 'MODULE_PATHNAME', 'pg_llama_model_size';
 CREATE FUNCTION llama_model_n_params(llama_model) RETURNS bigint IMMUTABLE STRICT LANGUAGE C AS 'MODULE_PATHNAME', 'pg_llama_model_n_params';
+
+/* API: tokenize */
+CREATE FUNCTION llama_tokenize(model llama_model, prompt text, add_special boolean default true, parse_special boolean default false) returns bigint[] IMMUTABLE STRICT LANGUAGE C AS 'MODULE_PATHNAME', 'pg_llama_tokenize';
+

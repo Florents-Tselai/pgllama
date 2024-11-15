@@ -50,3 +50,15 @@ SELECT llama_tokenize('/tmp/phi-2.Q2_K.gguf', '', add_special => true, parse_spe
  {}
 (1 row)
 
+SELECT llama_tokenize('/tmp/qwen2-0_5b-instruct-q8_0.gguf', 'Hello, world!', add_special => true, parse_special => true);
+  llama_tokenize  
+------------------
+ {9707,11,1879,0}
+(1 row)
+
+SELECT llama_tokenize('/tmp/qwen2-0_5b-instruct-q8_0.gguf', 'The quick brown fox jumps', add_special => true, parse_special => true);
+        llama_tokenize        
+------------------------------
+ {785,3974,13876,38835,34208}
+(1 row)
+

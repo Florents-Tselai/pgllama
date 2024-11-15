@@ -13,3 +13,5 @@ SELECT llama_tokenize('/tmp/phi-2.Q2_K.gguf', 'Hello World</s>', add_special => 
 SELECT llama_tokenize('/tmp/phi-2.Q2_K.gguf', 'Hello World</s>', add_special => true, parse_special => true);
 SELECT llama_tokenize('/tmp/phi-2.Q2_K.gguf', '', add_special => true, parse_special => true);
 
+SELECT llama_tokenize('/tmp/qwen2-0_5b-instruct-q8_0.gguf', 'Hello, world!', add_special => true, parse_special => true);
+SELECT llama_tokenize('/tmp/qwen2-0_5b-instruct-q8_0.gguf', 'The quick brown fox jumps', add_special => true, parse_special => true);

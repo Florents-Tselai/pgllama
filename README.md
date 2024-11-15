@@ -1,9 +1,11 @@
-# PgLlama: LLM inference in PostgreSQL
+# LlamaSQL: LLM inference in PostgreSQL
 
 [![build](https://github.com/Florents-Tselai/pgllama/actions/workflows/build.yml/badge.svg)](https://github.com/Florents-Tselai/pgpdf/actions/workflows/build.yml)
 
-Most LLMs programs and libraries  a wrapper, around a Python wrapper, around another obscure wrapper of `llama.cpp`.
-This exposes `libllama` as SQL primitives (types and functions).
+The main goal of **LlamaSQL** is to enable LLM inference  in SQL.
+It's a thin but loyal wrapper around `libllama`([llama.cpp](https://github.com/ggerganov/llama.cpp)).
+
+It's packaged as a Postgres extension.
 
 ```tsql
 SELECT '/tmp/tinyllama-1.1b-1t-openorca.Q2_K.gguf'::llama_model;

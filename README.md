@@ -2,8 +2,11 @@
 
 [![build](https://github.com/Florents-Tselai/pgllama/actions/workflows/build.yml/badge.svg)](https://github.com/Florents-Tselai/pgpdf/actions/workflows/build.yml)
 
-Most LLMs programs and libraries  a wrapper, around a Python wrapper, around another obscure wrapper of `llama.cpp`.
-This exposes `libllama` as SQL primitives (types and functions).
+Many LLM tools are wrappers, around a Python wrapper, around another obscure wrapper of `llama.cpp`.
+This exposes `libllama` to (types and functions).
+
+The main goal of LLamaSQL is to allow having low-level access to `libllama` using SQL.
+
 
 ```tsql
 SELECT '/tmp/tinyllama-1.1b-1t-openorca.Q2_K.gguf'::llama_model;

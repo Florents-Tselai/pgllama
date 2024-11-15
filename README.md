@@ -1,4 +1,4 @@
-# PgLlama: LLM inference in PostgreSQL
+# LlamaSQL: LLM inference in SQL
 
 [![build](https://github.com/Florents-Tselai/pgllama/actions/workflows/build.yml/badge.svg)](https://github.com/Florents-Tselai/pgpdf/actions/workflows/build.yml)
 
